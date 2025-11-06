@@ -1,20 +1,22 @@
-const AV = require('leancloud-storage');
-const leanengine = require('leanengine');
+const express = require('express');
+const AV = require('leanengine');
 
-const APP_ID = "0m5HgXwHNjbrLxC3DKOxgQom-gzGzoHsz"
-const APP_KEY = "pglFnDkid00IbYEf03SFL2Oh"
-const MASTER_KEY = "uunG01A8yKAjGTeWpufb8GHZ"
+AV.init({
+  appId: process.env.LEANCLOUD_APP_ID || "0m5HgXwHNjbrLxC3DKOxgQom-gzGzoHsz",
+  appKey: process.env.LEANCLOUD_APP_KEY || "pglFnDkid00IbYEf03SFL2Oh",
+  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || "uunG01A8yKAjGTeWpufb8GHZ"
+});
 
-AV.express(); 
+const app = express();
+app.use(AV.express());
 
-// 加载我们所有的云函数定义
 require('./cloud');
 
+app.get('/', (req, res) => {
+  res.send('LeanCloud Engine (v3.8) running successfully!');
+});
 
-const PORT = parseInt(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3000);
-leanengine.listen(PORT, function (err) {
-  if (err) {
-    return console.error(err);
-  }
-  console.log('LeanCloud Engine (V3.0 Stable) is running on port:', PORT);
+const PORT = process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`LeanCloud Engine is running on port ${PORT}`);
 });
