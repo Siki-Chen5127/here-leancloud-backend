@@ -1,14 +1,14 @@
 {
   "name": "here-backend",
   "version": "1.0.0",
-  "description": "“我在呢”的 LeanCloud 后端",
+  "description": "“我在呢”的 LeanCloud 后端 - V2.0",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "leancloud-storage": "^4.14.0",
-    "leanengine": "^3.11.0"
+    "@leancloud/storage": "^7.0.0",
+    "@leancloud/engine": "^2.0.0"
   },
   "engines": {
     "node": "18.x"

@@ -1,5 +1,5 @@
-const AV = require('leancloud-storage');
-const leanengine = require('leanengine');
+const AV = require('@leancloud/storage');
+const engine = require('@leancloud/engine');
 
 const APP_ID = "0m5HgXwHNjbrLxC3DKOxgQom-gzGzoHsz"
 const APP_KEY = "pglFnDkid00IbYEf03SFL2Oh"
@@ -9,16 +9,14 @@ AV.init({
   appKey: APP_KEY,
   masterKey: MASTER_KEY
 });
-
+engine.init(AV);
 require('./cloud');
 
 // 端口设置
 const PORT = parseInt(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3000);
-
-// 启动服务
-leanengine.listen(PORT, function (err) {
+engine.listen(PORT, function (err) {
   if (err) {
     return console.error(err);
   }
-  console.log('LeanCloud Engine is running on port:', PORT);
+  console.log('LeanCloud Engine (V2.0) is running on port:', PORT);
 });
