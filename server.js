@@ -7,6 +7,21 @@ AV.init({
   masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || "uunG01A8yKAjGTeWpufb8GHZ"
 });
 
+AV.Cloud.define("sendVerificationCode", async (request) => {
+  const phone = request.params.phone;
+  if (!phone) {
+    throw new AV.Cloud.Error("必须提供手机号码。", { code: 400 });
+  }
+
+  try {
+    await AV.Cloud.requestSmsCode(phone);
+    return { success: true, message: `验证码已发送到 ${phone}` };
+  } catch (e) {
+    console.error("在云函数 'sendVerificationCode' 中调用 requestSmsCode 失败:", e);
+    throw new AV.Cloud.Error(e.message, { code: e.code || 500 });
+  }
+});
+
 const app = express();
 app.use(AV.express());
 
