@@ -2,9 +2,9 @@ const express = require('express');
 const AV = require('leanengine');
 
 AV.init({
-  appId: process.env.LEANCLOUD_APP_ID || "0m5HgXwHNjbrLxC3DKOxgQom-gzGzoHsz",
-  appKey: process.env.LEANCLOUD_APP_KEY || "pglFnDkid00IbYEf03SFL2Oh",
-  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || "uunG01A8yKAjGTeWpufb8GHZ"
+  appId: "0m5HgXwHNjbrLxC3DKOxgQom-gzGzoHsz",
+  appKey: "pglFnDkid00IbYEf03SFL2Oh",
+  masterKey:"uunG01A8yKAjGTeWpufb8GHZ"
 });
 
 AV.Cloud.define("sendVerificationCode", async (request) => {
