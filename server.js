@@ -14,7 +14,7 @@ AV.Cloud.define("sendVerificationCode", async (request) => {
   }
 
   try {
-    await AV.Cloud.requestSmsCode(phone);
+    await AV.Cloud.requestSmsCode(phone, { useMasterKey: true });
     return { success: true, message: `验证码已发送到 ${phone}` };
   } catch (e) {
     console.error("在云函数 'sendVerificationCode' 中调用 requestSmsCode 失败:", e);
